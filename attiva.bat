@@ -1,1 +1,1 @@
-C:\Users\5Ci\Documents\django\env\Scripts\activate
+C:\Users\stefa\Documents\django\venv\Scripts\activate.bat
