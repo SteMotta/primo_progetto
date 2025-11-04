@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | INDEX SECONDA APP {% endblock title%}
+
+{% block content%}
+    <ol>
+        <li><a href="{% url 'seconda_app:es_if'%}">Esempio If</a></li>
+        <li><a href="{% url 'seconda_app:if_else_elif'%}">Esempio If Else e elif</a></li>
+        <li><a href="{% url 'seconda_app:es_for'%}">Esempio for</a></li>
+    </ol>
+{% endblock content%}

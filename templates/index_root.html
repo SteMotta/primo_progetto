@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<title>PRIMO PROGETTO - ROOT MENU</title>
-</head>
-<body>
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | ROOT MENU {% endblock title%}
+
+{% block content%}
     <ol>
         <li><a href="/admin">Pannello admin</a></li>
         <li><a href="{% url 'prima_app:index'%}">Index prima app</a></li>
     </ol>
-</body>
-</html>
+{% endblock content%}
