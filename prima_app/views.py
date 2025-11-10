@@ -18,5 +18,8 @@ def variabili(request):
     }
     return render(request, "prima_app/variabili.html", context)
 
+def chi_siamo(request):
+    return render(request, "prima_app/chi_siamo.html")
+
 def index(request):
     return render(request, "prima_app/index.html")
