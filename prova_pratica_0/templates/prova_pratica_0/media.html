@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | Media {% endblock title%}
+
+{% block content%}
+    <h1>Media</h1>
+    <p>Lista:</p>
+    <ul>
+        {% for num in lista_num %}
+        <li><b>{{ forloop.counter }}.</b> {{ num }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Media Valori:</h2>
+    {% if media < 6 %}
+        <p style = "color:red;"> {{ media }} </p>
+    {% elif media == 6 %}
+        <p> {{ media }} </p>
+    {% else %}
+        <p style = "color:green;"> {{ media }} </p>
+    {% endif %}
+    
+{% endblock content%}
