@@ -1,5 +1,6 @@
 import datetime
 from django.shortcuts import render
+import random
 
 def es_if(request):
     context={
