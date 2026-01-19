@@ -14,6 +14,7 @@
     {% endfor %}
     <h4>Giornalisti:</h4>
     {% for giornalista in giornalisti %}
+        <p><strong>Id: </strong><a href="../lista_articoli/{{ giornalista.id }}">{{ giornalista.id }}</a></p>
         <p><strong>Nome: </strong>{{ giornalista.nome }}</p>
         <p><strong>Cognome: </strong>{{ giornalista.cognome }}</p>
         <hr>

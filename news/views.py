@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from news.models import *
+import datetime
 
 def home(request):
     """
@@ -51,3 +52,74 @@ def listaArticoli(request, pk=None):
 
 def index(request):
     return render(request, 'news/index.html')
+
+def queryBase(request):
+    # 1. Tutti gli articoli scritti da giornalisti di un certo cognome:
+    articoli_cognome = Articolo.objects.filter(giornalista__cognome='Rossi')
+
+    # 2. Totale
+    numero_totale_articoli = Articolo.objects.count()
+
+    # 3. Conta il numero di articoli scritti da un giornalista specifico:
+    giornalista_6 = Giornalista.objects.get(id=6)
+    numero_articoli_giornalista_1 = Articolo.objects.filter(giornalista=giornalista_6).count()
+
+    # 4. Ordinare gli articoli per numero di visualizzazioni in ordine decrescente:
+    articoli_ordinati = Articolo.objects.order_by('-visualizzazione')
+
+    # 5. tutti gli articoli che non hanno visualizzazioni:
+    articoli_senza_visualizzazioni = Articolo.objects.filter(visualizzazione=0)
+
+    # 6. articolo più visualizzato
+    articolo_piu_visualizzato = Articolo.objects.order_by('-visualizzazione').first()
+
+    # 7. Tutti i giornalisti nati dopo una certa data:
+    giornalisti_data = Giornalista.objects.filter(anno_di_nascita__gt=datetime.date(1990, 1, 1))
+
+    # 8. tutti gli articoli pubblicati in una data specifica:
+    articoli_del_giorno = Articolo.objects.filter(data=datetime.date(2023, 1, 1))
+
+    # 9. tutti gli articoli pubblicati in un intervallo di date
+    articoli_periodo = Articolo.objects.filter(
+        data__range=(datetime.date(2023, 1, 1), datetime.date(2023, 12, 31))
+    )
+
+    # 10. gli articoli scritti da giornalisti nati prima del 1980:
+    giornalisti_nati = Giornalista.objects.filter(anno_di_nascita__lt=datetime.date(1980, 1, 1))
+    articoli_giornalisti_nati = Articolo.objects.filter(giornalista__in=giornalisti_nati)
+
+    # 11. il giornalista più giovane:
+    giornalista_giovane = Giornalista.objects.order_by('anno_di_nascita').first()
+
+    # 12. il giornalista più anziano:
+    giornalista_anziano = Giornalista.objects.order_by('-anno_di_nascita').first()
+
+    # 13. gli ultimi 5 articoli pubblicati:
+    ultimi_5_articoli = Articolo.objects.order_by('-data')[:5]
+
+    # 14. tutti gli articoli con un certo numero minimo di visualizzazioni:
+    articoli_minime_visualizzazioni = Articolo.objects.filter(visualizzazione__gte=100)
+
+    # 15. tutti gli articoli che contengono una certa parola nel titolo:
+    articoli_parola = Articolo.objects.filter(titolo__icontains='importante')
+
+    # Creare il dizionario context
+    context = {
+        'articoli_cognome': articoli_cognome,
+        'numero_totale_articoli': numero_totale_articoli,
+        'numero_articoli_giornalista_1': numero_articoli_giornalista_1,
+        'articoli_ordinati': articoli_ordinati,
+        'articoli_senza_visualizzazioni': articoli_senza_visualizzazioni,
+        'articolo_piu_visualizzato': articolo_piu_visualizzato,
+        'giornalisti_data': giornalisti_data,
+        'articoli_del_giorno': articoli_del_giorno,
+        'articoli_periodo': articoli_periodo,
+        'articoli_giornalisti_nati': articoli_giornalisti_nati,
+        'giornalista_giovane': giornalista_giovane,
+        'giornalista_anziano': giornalista_anziano,
+        'ultimi_5_articoli': ultimi_5_articoli,
+        'articoli_minime_visualizzazioni': articoli_minime_visualizzazioni,
+        'articoli_parola': articoli_parola,
+    }
+
+    return render(request, 'query_base.html', context)
