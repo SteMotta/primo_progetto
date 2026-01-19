@@ -79,6 +79,18 @@
                     <a class="dropdown-item" href="{% url 'prova_pratica_0:media'%}">Media</a>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <!-- Dropdown seconda app-->
+                <a class="nav-link dropdown-toggle" href="#" id="secondaAppDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    News
+                </a>
+                <div class="dropdown-menu" aria-labelledby="secondaAppDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'news:homepage'%}">Homepage</a>
+                    <a class="dropdown-item" href="{% url 'news:lista_articoli'%}">Lista Articoli</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>

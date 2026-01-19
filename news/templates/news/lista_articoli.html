@@ -3,13 +3,18 @@
 {% block title%} {{block.super}} | Lista Articoli {% endblock title%}
 
 {% block content%}
-    {% if is_giornalista %}
-        <h1>Articoli di un giornalista:</h1>
+    {% if is_vuoto %}
+        <h1>Nessun articolo trovato</h1>
     {% else %}
-        <h1>Tutti gli articoli:</h1>
+        {% if is_giornalista %}
+            <h1>Articoli di un giornalista:</h1>
+        {% else %}
+            <h1>Tutti gli articoli:</h1>
+        {% endif %}
     {% endif %}
+
     {% for articolo in articoli %}
-        <h5><b>Titolo:</b> <a href="../articoli/{{ articolo.id }}">{{ articolo.titolo }}</a></h5>
+        <h5><b>Titolo:</b> <a href="../articolo/{{ articolo.id }}">{{ articolo.titolo }}</a></h5>
         <h5><b>Contenuto:</b> {{ articolo.contenuto }}</h5>
         <h5><b>Autore:</b> {{ articolo.giornalista }}</h5>
         <hr>

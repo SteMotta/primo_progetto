@@ -45,5 +45,9 @@ def articoloDetailView(request, pk):
 def listaArticoli(request, pk=None):
     articoli = Articolo.objects.all() if pk is None else Articolo.objects.filter(giornalista_id=pk)
     is_giornalista = True if pk is not None else False
-    context = {"articoli": articoli, "is_giornalista": is_giornalista}
+    is_vuoto = True if not articoli else False
+    context = {"articoli": articoli, "is_giornalista": is_giornalista, "is_vuoto": is_vuoto}
     return render(request, 'lista_articoli.html', context)
+
+def index(request):
+    return render(request, 'news/index.html')
