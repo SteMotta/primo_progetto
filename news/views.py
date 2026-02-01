@@ -106,10 +106,27 @@ def queryBase(request):
     # 16 Articoli pubblicati in un certo mese di un anno specifico
     artioli_mese_anno = Articolo.objects.filter(data__month=1, data__year=2023)
 
-    # 17 Giornalista con almeno un articolo con più di 100 visualizzazioni
-    giornalisti_con_articoli_popolari = Giornalista.objects.filter(articoli__visuazzioni__gte=100).distinct()
+    # 17 Giornalista con almeno un articolo con più di 100 visualizzazioni, attraverso la foreign key dell'articolo
+    giornalisti_con_articoli_popolari = Giornalista.objects.filter(articoli__visualizzazioni__gte=100).distinct()
 
-    #
+    # Utilizzo di piú condizioni di selezione
+    data = datetime.date(1990, 1, 1)
+    visualizzazioni = 50
+    # Per mettere in AND le condizioni separarle con la virgola
+    # 18
+    articoli_con_and = Articolo.objects.filter(giornalista__anno_di_nascita__gt=data, visualizzazioni__gte=visualizzazioni)
+
+    # Per mettere in OR le condizioni utilizzare l'operatore Q
+    from django.db.models import Q
+    # 19
+    articoli_con_or = Articolo.objects.filter(Q(giornalista__anno_di_nascita__gt=data) | Q(visualizzazioni__gte=visualizzazioni))
+
+    # Per il NOT (~) utilizzare l'operatore Q
+    # 20 con filter
+    # articoli_con_not = Articolo.objects.filter(~Q(giornalista__anno_di_nascita__gt=data))
+    # oppure il metodo exclude
+    articoli_con_not = Articolo.objects.exclude(giornalista__anno_di_nascita__gt=data)
+
 
     # Creare il dizionario context
     context = {
@@ -128,6 +145,11 @@ def queryBase(request):
         'ultimi_5_articoli': ultimi_5_articoli,
         'articoli_minime_visualizzazioni': articoli_minime_visualizzazioni,
         'articoli_parola': articoli_parola,
+        'artioli_mese_anno': artioli_mese_anno,
+        'giornalisti_con_articoli_popolari': giornalisti_con_articoli_popolari,
+        'articoli_con_and': articoli_con_and,
+        'articoli_con_or': articoli_con_or,
+        'articoli_con_not': articoli_con_not
     }
 
     return render(request, 'query_base.html', context)

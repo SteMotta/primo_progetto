@@ -94,5 +94,36 @@
     {% for articolo in articoli_parola %}
         <p>{{ articolo.titolo }}</p>
     {% endfor %}
+    <hr>
+
+    <h4>16. Articoli pubblicati in un certo mese di un anno specifico</h4>
+    {% for articolo in articoli_mese_anno %}
+        <p>{{ articolo.titolo }}</p>
+    {% endfor %}
+    <hr>
+
+    <h4>17. Giornalista con almeno un articolo con più di 100 visualizzazioni</h4>
+    {% for giornalista in giornalisti_con_articoli_popolari %}
+        <p>{{ giornalista.nome }} {{ giornalista.cognome }} ({{ giornalista.anno_di_nascita }})</p>
+    {% endfor %}
+    <hr>
+
+    <h4>18. Utilizzo di piú condizioni con AND</h4>
+    {% for articolo in articoli_con_and %}
+        <p>{{ articolo.titolo }}</p>
+    {% endfor %}
+    <hr>
+
+    <h4>19. Utilizzo di piú condizioni con OR</h4>
+    {% for articolo in articoli_con_or %}
+        <p>{{ articolo.titolo }}</p>
+    {% endfor %}
+    <hr>
+
+    <h4>20. Condizione con NOT</h4>
+    {% for articolo in articoli_con_not %}
+        <p>{{ articolo.titolo }}</p>
+    {% endfor %}
+
 
 {% endblock content%}
