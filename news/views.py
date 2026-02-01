@@ -65,13 +65,13 @@ def queryBase(request):
     numero_articoli_giornalista_1 = Articolo.objects.filter(giornalista=giornalista_6).count()
 
     # 4. Ordinare gli articoli per numero di visualizzazioni in ordine decrescente:
-    articoli_ordinati = Articolo.objects.order_by('-visualizzazione')
+    articoli_ordinati = Articolo.objects.order_by('-visualizzazioni')
 
     # 5. tutti gli articoli che non hanno visualizzazioni:
-    articoli_senza_visualizzazioni = Articolo.objects.filter(visualizzazione=0)
+    articoli_senza_visualizzazioni = Articolo.objects.filter(visualizzazioni=0)
 
     # 6. articolo più visualizzato
-    articolo_piu_visualizzato = Articolo.objects.order_by('-visualizzazione').first()
+    articolo_piu_visualizzato = Articolo.objects.order_by('-visualizzazioni').first()
 
     # 7. Tutti i giornalisti nati dopo una certa data:
     giornalisti_data = Giornalista.objects.filter(anno_di_nascita__gt=datetime.date(1990, 1, 1))
@@ -98,10 +98,18 @@ def queryBase(request):
     ultimi_5_articoli = Articolo.objects.order_by('-data')[:5]
 
     # 14. tutti gli articoli con un certo numero minimo di visualizzazioni:
-    articoli_minime_visualizzazioni = Articolo.objects.filter(visualizzazione__gte=100)
+    articoli_minime_visualizzazioni = Articolo.objects.filter(visualizzazioni__gte=100)
 
     # 15. tutti gli articoli che contengono una certa parola nel titolo:
     articoli_parola = Articolo.objects.filter(titolo__icontains='importante')
+
+    # 16 Articoli pubblicati in un certo mese di un anno specifico
+    artioli_mese_anno = Articolo.objects.filter(data__month=1, data__year=2023)
+
+    # 17 Giornalista con almeno un articolo con più di 100 visualizzazioni
+    giornalisti_con_articoli_popolari = Giornalista.objects.filter(articoli__visuazzioni__gte=100).distinct()
+
+    #
 
     # Creare il dizionario context
     context = {

@@ -27,7 +27,7 @@
 
     <h4>4. Articoli ordinati per visualizzazioni (decrescente)</h4>
     {% for articolo in articoli_ordinati %}
-        <p>{{ articolo.titolo }} – {{ articolo.visualizzazione }} visualizzazioni</p>
+        <p>{{ articolo.titolo }} – {{ articolo.visualizzazioni }} visualizzazioni</p>
     {% endfor %}
     <hr>
 
@@ -40,7 +40,7 @@
     <h4>6. Articolo più visualizzato</h4>
         <p>
             {{ articolo_piu_visualizzato.titolo }}
-            ({{ articolo_piu_visualizzato.visualizzazione }} visualizzazioni)
+            ({{ articolo_piu_visualizzato.visualizzazioni }} visualizzazioni)
         </p>
     <hr>
 
@@ -86,7 +86,7 @@
 
     <h4>14. Articoli con almeno 100 visualizzazioni</h4>
     {% for articolo in articoli_minime_visualizzazioni %}
-        <p>{{ articolo.titolo }} ({{ articolo.visualizzazione }})</p>
+        <p>{{ articolo.titolo }} ({{ articolo.visualizzazioni }})</p>
     {% endfor %}
     <hr>
 
