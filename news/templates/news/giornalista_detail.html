@@ -1,0 +1,15 @@
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | {{ articolo.titolo }} {% endblock title%}
+
+{% block content%}
+    <h1>Dettagli del giornalista:</h1>
+    <h1>{{ giornalista.nome }} {{ giornalista.cognome }}</h1>
+    <h1>Nato il {{ giornalista.anno_di_nascita }}</h1>
+    <h3>Tutti i suoi articoli e visualizzazioni:</h3>
+    <ul>
+        {% for articolo in articoli %}
+            <li><strong>Titolo:</strong> <a href="{% url 'news:articolo_detail' articolo.id %}">{{ articolo.titolo }}</a> - n.{{ articolo.visualizzazioni }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content%}

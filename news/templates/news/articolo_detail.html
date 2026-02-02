@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 
-{% block title%} {{block.super}} | {{ articolo.titolo }} {% endblock title%}
+{% block title%} {{block.super}} | {{ giornalista.nome }} {{ giornalista.cognome }} {% endblock title%}
 
 {% block content%}
     <h1>{{ articolo.titolo }}</h1>

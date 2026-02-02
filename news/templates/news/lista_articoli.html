@@ -16,7 +16,7 @@
     {% for articolo in articoli %}
         <h5><b>Titolo:</b> <a href="../articolo/{{ articolo.id }}">{{ articolo.titolo }}</a></h5>
         <h5><b>Contenuto:</b> {{ articolo.contenuto }}</h5>
-        <h5><b>Autore:</b> {{ articolo.giornalista }}</h5>
+        <h5><b>Autore:</b> <a href="{% url 'news:giornalista_detail' articolo.giornalista.id %}">{{ articolo.giornalista }}</a></h5>
         <hr>
     {% endfor %}
 {% endblock content%}
