@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title%} {{block.super}} | Lista Medie {% endblock title%}
+
+{% block content%}
+    <h2>Verifiche:</h2>
+    <h3>Risultati</h3>
+    <ul>
+        <li>Voto massimo: {{ max_voto }}</li>
+        <li>Materie con voto massimo: {% for materia in materie_max %}
+        	{% if not forloop.last %}
+            	{{ materia }},
+            {% else %}
+            	{{ materia }}
+            {% endif %}
+        {% endfor %}
+        </li>
+        <li>Studenti con voto massimo: {% for studente in studenti_max %}
+            {% if not forloop.last %}
+            	{{ studente }},
+            {% else %}
+            	{{ studente }}
+            {% endif %}
+        {% endfor %}
+        </li>
+        <li>Voto minimo: {{ min_voto }}</li>
+        <li>Materie con voto minimo: {% for materia in materie_min %}
+        	{% if not forloop.last %}
+            	{{ materia }},
+            {% else %}
+            	{{ materia }}
+            {% endif %}
+        {% endfor %}
+        </li>
+        <li>Studenti con voto minimo: {% for studente in studenti_min %}
+            {% if not forloop.last %}
+            	{{ studente }},
+            {% else %}
+            	{{ studente }}
+            {% endif %}
+        {% endfor %}
+        </li>
+    </ul>
+{% endblock content%}

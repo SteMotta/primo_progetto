@@ -69,11 +69,11 @@
 
             <li class="nav-item dropdown">
                 <!-- Dropdown seconda app-->
-                <a class="nav-link dropdown-toggle" href="#" id="secondaAppDropdownMenuLink" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="provaPratica0DropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Prova Pratica 0
                 </a>
-                <div class="dropdown-menu" aria-labelledby="secondaAppDropdownMenuLink">
+                <div class="dropdown-menu" aria-labelledby="provaPratica0DropdownMenuLink">
                     <a class="dropdown-item" href="{% url 'prova_pratica_0:index'%}">Index</a>
                     <a class="dropdown-item" href="{% url 'prova_pratica_0:somma'%}">Somma</a>
                     <a class="dropdown-item" href="{% url 'prova_pratica_0:media'%}">Media</a>
@@ -82,15 +82,29 @@
 
             <li class="nav-item dropdown">
                 <!-- Dropdown seconda app-->
-                <a class="nav-link dropdown-toggle" href="#" id="secondaAppDropdownMenuLink" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="newsDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     News
                 </a>
-                <div class="dropdown-menu" aria-labelledby="secondaAppDropdownMenuLink">
+                <div class="dropdown-menu" aria-labelledby="newsDropdownMenuLink">
                     <a class="dropdown-item" href="{% url 'news:index'%}">Index</a>
                     <a class="dropdown-item" href="{% url 'news:homepage'%}">Homepage</a>
                     <a class="dropdown-item" href="{% url 'news:lista_articoli'%}">Lista Articoli</a>
                     <a class="dropdown-item" href="{% url 'news:query_base'%}">Query Base</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <!-- Dropdown seconda app-->
+                <a class="nav-link dropdown-toggle" href="#" id="votiDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    News
+                </a>
+                <div class="dropdown-menu" aria-labelledby="votiDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'voti:index'%}">Index</a>
+                    <a class="dropdown-item" href="{% url 'voti:lista_materie'%}">Lista Materie</a>
+                    <a class="dropdown-item" href="{% url 'voti:lista_voti_assenze'%}">Lista Voti Assenze</a>
+                    <a class="dropdown-item" href="{% url 'voti:lista_medie'%}">Lista Medie</a>
+                    <a class="dropdown-item" href="{% url 'voti:max_min_voti'%}">Min Max Voti</a>
                 </div>
             </li>
         </ul>

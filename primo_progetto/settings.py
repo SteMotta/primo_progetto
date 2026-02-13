@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'prima_app',
     'seconda_app',
     'prova_pratica_0',
-    'news'
+    'news',
+    'voti',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'seconda_app/templates/seconda_app'),
                  os.path.join(BASE_DIR, 'prova_pratica_0/templates/prova_pratica_0'),
                  os.path.join(BASE_DIR, 'news/templates/news'),
+                 os.path.join(BASE_DIR, 'voti/templates/voti'),
                  os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
