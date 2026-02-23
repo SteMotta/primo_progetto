@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
@@ -38,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'prima_app',
     'seconda_app',
     'prova_pratica_0',
     'news',
     'voti',
+    'forms_app'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +69,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'prova_pratica_0/templates/prova_pratica_0'),
                  os.path.join(BASE_DIR, 'news/templates/news'),
                  os.path.join(BASE_DIR, 'voti/templates/voti'),
+                 os.path.join(BASE_DIR, 'forms_app/templates/forms_app'),
                  os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -97,7 +97,7 @@
                 <!-- Dropdown seconda app-->
                 <a class="nav-link dropdown-toggle" href="#" id="votiDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    News
+                    Voti
                 </a>
                 <div class="dropdown-menu" aria-labelledby="votiDropdownMenuLink">
                     <a class="dropdown-item" href="{% url 'voti:index'%}">Index</a>
@@ -105,6 +105,17 @@
                     <a class="dropdown-item" href="{% url 'voti:lista_voti_assenze'%}">Lista Voti Assenze</a>
                     <a class="dropdown-item" href="{% url 'voti:lista_medie'%}">Lista Medie</a>
                     <a class="dropdown-item" href="{% url 'voti:max_min_voti'%}">Min Max Voti</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <!-- Dropdown seconda app-->
+                <a class="nav-link dropdown-toggle" href="#" id="formsAppDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Contatti
+                </a>
+                <div class="dropdown-menu" aria-labelledby="formsAppDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'forms_app:contatti'%}">Contattaci</a>
+                    <a class="dropdown-item" href="{% url 'forms_app:lista_contatti'%}">Lista Contatti</a>
                 </div>
             </li>
         </ul>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title%} {{block.super}} | Lista contatti {% endblock title%}
+{% block content%}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Cognome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contenuto</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contatto in contatti %}
+            <tr>
+                <td>{{ contatto.nome }}</td>
+                <td>{{ contatto.cognome }}</td>
+                <td>{{ contatto.email }}</td>
+                <td>{{ contatto.contenuto }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content%}
