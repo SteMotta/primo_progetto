@@ -21,7 +21,7 @@
                 <td><a href="{% url 'forms_app:elimina_contatto' contatto.pk%}"><i class="fas fa-eraser"></i></a></td>
                 <td><a href="{% url 'forms_app:modifica_contatto' contatto.pk%}"><i class="fas fa-edit"></i></a></td>
                 {% endif %}
-                <td>{{ contattso.nome }}</td>
+                <td>{{ contatto.nome }}</td>
                 <td>{{ contatto.cognome }}</td>
                 <td>{{ contatto.email }}</td>
                 <td>{{ contatto.contenuto }}</td>
