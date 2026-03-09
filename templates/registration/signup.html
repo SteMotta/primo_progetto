@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} {{block.super}} | SIGN UP {% endblock title%}
+{% block content %}
+    <h2>Registrazione</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-danger">Registrati</button>
+    </form>
+
+    <p class = "mt-2">
+        Hai già un account?
+        <a href="{% url 'login' %}">Login</a>
+    </p>
+{% endblock %}
