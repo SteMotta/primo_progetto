@@ -121,6 +121,16 @@
                     <a class="dropdown-item" href="{% url 'forms_app:lista_contatti'%}">Lista Contatti</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <!-- Dropdown seconda app-->
+                <a class="nav-link dropdown-toggle" href="#" id="apiAppDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Api
+                </a>
+                <div class="dropdown-menu" aria-labelledby="apiAppDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'api:todos'%}">Todos</a>
+                </div>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}

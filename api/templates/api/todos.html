@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | TODOS {% endblock title%}
+
+{% block content%}
+    <h1>Lista delle attività</h1>
+
+    {% if errore %}
+        <p style="color: red">{{ errore }}</p>
+    {% endif %}
+
+    {% if todos %}
+        <ul>
+            {% for element in todos %}
+                <li>
+                    <strong>ID:</strong> {{element.id}} <br>
+                    <strong>Titolo:</strong> {{ element.title }} <br>
+                    <strong>Completo:</strong> {{ element.completed }} <br><br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock content%}

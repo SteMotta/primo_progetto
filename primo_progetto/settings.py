@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'news',
     'voti',
     'forms_app',
-    'accounts'
+    'accounts',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'news/templates/news'),
                  os.path.join(BASE_DIR, 'voti/templates/voti'),
                  os.path.join(BASE_DIR, 'forms_app/templates/forms_app'),
+                 os.path.join(BASE_DIR, 'api/templates/api'),
                  os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
