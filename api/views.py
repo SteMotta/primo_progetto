@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from pws import CLIENT_ID, CLIENT_SECRET
+
+def index(request):
+    return render(request, 'api/index.html')
 def todos_view(request):
     try:
         response = requests.get('https://jsonplaceholder.typicode.com/todos/')
@@ -27,7 +30,13 @@ def get_spotify_oauth(request):
         client_secret=CLIENT_SECRET,
         redirect_uri="http://127.0.0.1:8000/api/spotify-callback",
         scope=["user-library-read user-read-recently-played"],
-        cache_path=spotipy.cache_handler.DjangoSessionCacheHandler(request))
+        cache_handler=spotipy.cache_handler.DjangoSessionCacheHandler(request))
+
+# 1. View per iniziare il login Spotify
+def spotify_login(request):
+    sp_oauth = get_spotify_oauth(request)
+    auth_url = sp_oauth.get_authorize_url()
+    return redirect(auth_url)
 
 # 2. View per gestire il callback di Spotify
 def spotify_callback(request):
@@ -59,7 +68,7 @@ def spotify(request):
 
     if not token_info:
         # Se non ci sono token, reindirizza l'utente alla pagina di login Spotify
-        return redirect('spotify_login')
+        return redirect('api:spotify_login')
 
     # Inizializza SpotifyOAuth con i token esistenti
     sp_oauth = get_spotify_oauth(request)
@@ -76,16 +85,13 @@ def spotify(request):
     try:
         results = sp.current_user_saved_tracks()
         lista_canzoni = []
-        img_urls = []
         for item in results['items']:
             track_name = item['track']['name']
             artist_name = item['track']['artists'][0]['name']
-            img_urls.append(item['track']['album']['images'][0]['url'])
-            lista_canzoni.append(f"{track_name} - {artist_name}")
+            lista_canzoni.append((f"{track_name} - {artist_name}", item['track']['album']['images'][0]['url']))
 
         context = {
-            "results": lista_canzoni,
-            "imgs": img_urls,
+            "results": lista_canzoni
         }
         return render(request, 'spotify.html', context)
     except Exception as e:
