@@ -7,7 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-    return render(request, 'news/index.html')
+    return render(request, 'forms_app/index.html')
 def contatti(request):
     if request.method == 'POST':
         form = FormContatto(request.POST)
