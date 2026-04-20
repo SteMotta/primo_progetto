@@ -27,10 +27,7 @@ def todos_view(request):
     })
 
 def get_spotify_oauth(request):
-    if sys.platform.startswith('linux'):
-        uri = "https://mottastefano.eu.pythonanywhere.com/api/spotify-callback"
-    else:
-        uri = "http://127.0.0.1:8000/api/spotify-callback"
+    uri = f"{request.scheme}://{request.get_host()}/api/spotify-callback"
     return SpotifyOAuth(
         client_id=CLIENT_ID,
         client_secret=CLIENT_SECRET,
