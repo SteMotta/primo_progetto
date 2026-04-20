@@ -5,6 +5,9 @@ from .models import Contatto
 from django.shortcuts import get_object_or_404,redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+
+def index(request):
+    return render(request, 'news/index.html')
 def contatti(request):
     if request.method == 'POST':
         form = FormContatto(request.POST)
