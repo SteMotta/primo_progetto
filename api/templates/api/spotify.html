@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+
+{% block title%} {{block.super}} | TODOS {% endblock title%}
+
+{% block content%}
+    <h1>Immagini brani</h1>
+
+    {% if imgs %}
+        <ul>
+            {% for img in imgs %}
+                <li>
+                    <img src="{{ img }}" alt="Copertina Album">
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock content%}

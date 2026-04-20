@@ -1,6 +1,8 @@
 import requests
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+from pws import CLIENT_ID, CLIENT_SECRET
 def todos_view(request):
     try:
         response = requests.get('https://jsonplaceholder.typicode.com/todos/')
@@ -18,3 +20,78 @@ def todos_view(request):
         'todos': lista_todos,
         'errore': messaggio_errore
     })
+
+def get_spotify_oauth(request):
+    return SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri="http://127.0.0.1:8000/api/spotify-callback",
+        scope=["user-library-read user-read-recently-played"],
+        cache_path=spotipy.cache_handler.DjangoSessionCacheHandler(request))
+
+# 2. View per gestire il callback di Spotify
+def spotify_callback(request):
+    sp_oauth = get_spotify_oauth(request)
+    code = request.GET.get('code')
+
+    if code:
+        # Scambia il codice per un token di accesso e un token di refresh
+        token_info = sp_oauth.get_access_token(code, check_cache=False)
+
+        # Salvare le informazioni del token nella sessione dell'utente
+        # In un'applicazione reale, si potrebbe voler salvare questi token in un database
+        # associati all'utente Django corrente.
+        request.session['token_info'] = token_info
+        request.session.modified = True
+
+        return redirect('api:spotify_success') # Reindirizza a una pagina di successo nella tua app
+    else:
+        # Gestisce il caso in cui non viene ricevuto un codice (es. utente nega l'autorizzazione)
+        return render(request, 'spotify_error.html', {'message': 'Autorizzazione negata o errore.'})
+
+# Esempio di view di successo
+def spotify_success(request):
+    return render(request, 'spotify_success.html', {'message': 'Autenticazione Spotify riuscita!'})
+
+
+def spotify(request):
+    token_info = request.session.get('token_info', None)
+
+    if not token_info:
+        # Se non ci sono token, reindirizza l'utente alla pagina di login Spotify
+        return redirect('spotify_login')
+
+    # Inizializza SpotifyOAuth con i token esistenti
+    sp_oauth = get_spotify_oauth(request)
+
+    # Controlla se il token di accesso è scaduto e rinfrescalo se necessario
+    if sp_oauth.is_token_expired(token_info):
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+        request.session['token_info'] = token_info
+        request.session.modified = True
+
+    # Inizializza il client Spotipy con i token attuali
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+
+    try:
+        results = sp.current_user_saved_tracks()
+        lista_canzoni = []
+        img_urls = []
+        for item in results['items']:
+            track_name = item['track']['name']
+            artist_name = item['track']['artists'][0]['name']
+            img_urls.append(item['track']['album']['images'][0]['url'])
+            lista_canzoni.append(f"{track_name} - {artist_name}")
+
+        context = {
+            "results": lista_canzoni,
+            "imgs": img_urls,
+        }
+        return render(request, 'spotify.html', context)
+    except Exception as e:
+        # Gestisci errori API (es. token non valido anche dopo refresh)
+        print(f"Errore durante la chiamata API di Spotify: {e}")
+        # Potresti voler cancellare i token e far rifare l'autenticazione all'utente
+        if 'token_info' in request.session:
+            del request.session['token_info']
+        return redirect('api:spotify_login') # Reindirizza per un nuovo login
