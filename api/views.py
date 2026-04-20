@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from django.shortcuts import render, redirect
 import spotipy
@@ -25,10 +27,14 @@ def todos_view(request):
     })
 
 def get_spotify_oauth(request):
+    if sys.platform.startswith('linux'):
+        uri = "https://mottastefano.eu.pythonanywhere.com/api/spotify-callback"
+    else:
+        uri = "http://127.0.0.1:8000/api/spotify-callback"
     return SpotifyOAuth(
         client_id=CLIENT_ID,
         client_secret=CLIENT_SECRET,
-        redirect_uri="http://127.0.0.1:8000/api/spotify-callback",
+        redirect_uri=uri,
         scope=["user-library-read user-read-recently-played"],
         cache_handler=spotipy.cache_handler.DjangoSessionCacheHandler(request))
 
